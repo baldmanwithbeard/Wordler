@@ -1,37 +1,46 @@
-﻿//// See https://aka.ms/new-console-template for more information
+﻿//// Use ReSharper's "to top-level code to apply new .NET 6 top-level statements syntax
+//// (this will use implicit declaration of the Program class)
+//// See https://aka.ms/new-console-template for more information on the template
 
-using Wordler.Library.Messaging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Wordler.ConsoleApp;
+using Wordler.Library.Messaging;
 
-using var host = CreateHostBuilder(args).Build();
-using var scope = host.Services.CreateScope();
+namespace Wordler.ConsoleApp;
 
-var services = scope.ServiceProvider;
-
-try
+internal static class Program
 {
-    if (args.Any())
+    internal static void Main(string[] args)
     {
-        services.GetRequiredService<App>().Run(args);
-        return;
-    }
+        using var host = CreateHostBuilder(args).Build();
+        using var scope = host.Services.CreateScope();
 
-    services.GetRequiredService<App>().Run();
-}
-// rethrows any exception from the app as a console message
-catch (Exception ex)
-{
-    Console.WriteLine(ex.Message);
-}
+        var services = scope.ServiceProvider;
 
-static IHostBuilder CreateHostBuilder(string[] args)
-{
-    return Host.CreateDefaultBuilder(args)
-        .ConfigureServices((_, services) =>
+        try
         {
-            services.AddSingleton<IMessages, Messages>();
-            services.AddSingleton<App>();
-        });
+            if (args.Any())
+            {
+                services.GetRequiredService<App>().Run(args);
+                return;
+            }
+
+            services.GetRequiredService<App>().Run();
+        }
+        // rethrows any exception from the app as a console message
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+
+        static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddSingleton<IMessages, Messages>();
+                    services.AddSingleton<App>();
+                });
+        }
+    }
 }
