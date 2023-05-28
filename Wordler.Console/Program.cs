@@ -8,12 +8,11 @@ using Wordler.ConsoleApp;
 using var host = CreateHostBuilder(args).Build();
 using var scope = host.Services.CreateScope();
 
-var usingArgs = false;
 var services = scope.ServiceProvider;
 
 try
 {
-    if (usingArgs)
+    if (args.Any())
     {
         services.GetRequiredService<App>().Run(args);
         return;
