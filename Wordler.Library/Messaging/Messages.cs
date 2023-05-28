@@ -27,11 +27,11 @@ public class Messages : IMessages
 
             if (messages is null) throw new NullReferenceException("The specified language was not found in the json file.");
 
-            return messages.Translations[key];
+            return messages.Translations?[key] ?? string.Empty;
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            _log.LogError("Error looking up the custom text", ex);
+            _log.LogError("Error looking up the custom text");
             throw;
         }
     }
