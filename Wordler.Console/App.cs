@@ -13,19 +13,8 @@ internal class App
 
     public void Run(string[] args)
     {
-        var languageCode = "en";
-
-        foreach (var arg in args)
-        {
-            if (!arg.ToLower().StartsWith("lang=")) continue;
-            //if (arg.Length < 5) throw new ArgumentOutOfRangeException(nameof(args), "Invalid lang= argument; invalid index range.");
-            languageCode = arg[5..];
-
-            break;
-        }
-
+        var languageCode = args.FirstOrDefault(a => a.ToLower().StartsWith("lang="))?.Substring(5) ?? "en";
         var message = _messages.Greeting(languageCode);
-
         Console.WriteLine(message);
     }
 }
