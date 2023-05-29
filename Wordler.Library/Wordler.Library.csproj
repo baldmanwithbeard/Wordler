@@ -7,6 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="CustomText.json" />
+    <None Remove="WordleData\HeterogramScores.json" />
+    <None Remove="WordleData\LetterScores.json" />
+    <None Remove="WordleData\WordScores.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="CustomText.json" />
+    <EmbeddedResource Include="WordleData\HeterogramScores.json" />
+    <EmbeddedResource Include="WordleData\LetterScores.json" />
+    <EmbeddedResource Include="WordleData\WordScores.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
   </ItemGroup>
 
