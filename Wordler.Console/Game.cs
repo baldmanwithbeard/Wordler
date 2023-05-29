@@ -89,12 +89,12 @@ namespace Wordler.ConsoleApp
                 Console.WriteLine("Enter your feedback for the guess");
                 feedback = Console.ReadLine() ?? "";
             }
-            while (!ValidateInput(feedback));
+            while (!InputIsValid(feedback));
 
             return feedback;
         }
 
-        private static bool ValidateInput(string input)
+        private static bool InputIsValid(string input)
         {
             var isValidInput = Regex.IsMatch(input, @"^[!-_]{5}$");
             if (!isValidInput)

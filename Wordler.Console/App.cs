@@ -1,13 +1,16 @@
-﻿using Wordler.Library.Messaging;
+﻿using Wordler.Library;
+using Wordler.Library.Messaging;
 
 namespace Wordler.ConsoleApp;
 
 internal class App
 {
     private readonly IMessages _messages;
+    private CommandFactory commandFactory;
 
     public App(IMessages messages)
     {
+        commandFactory = new CommandFactory();
         _messages = messages;
     }
 
@@ -24,7 +27,7 @@ internal class App
 
     private static void ProvideHelp()
     {
-        Console.WriteLine("ask chatgpt you buffoon. loljk, i just ain't written it out yet, sry");
+        Console.WriteLine("");
 
         Console.ReadLine();
     }
